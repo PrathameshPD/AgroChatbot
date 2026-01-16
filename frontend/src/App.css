@@ -1,0 +1,534 @@
+:root {
+  --primary-color: #2E7D32;
+  --primary-color-dark: #1B5E20;
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --shadow: 0 2px 10px rgb(0 0 0);
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  overflow: hidden; /* Prevent vertical scrolling on the main page */
+}
+
+/* Prevent Google Translate from adding a top margin to the body */
+body.translated-ltr,
+body.translated-rtl {
+  top: 0 !important; /* Prevent Google Translate from adding a top margin */
+}
+
+/* Hide Google Translate banner and tooltip */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+.hero-section {
+  position: relative;
+  height: 100vh; /* Ensure hero section fills the entire viewport height */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  background-image: url('https://images.pexels.com/photos/1509607/pexels-photo-1509607.jpeg');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.App-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: var(--shadow);
+  align-items: center;
+  padding: 20px 50px;
+  background: var(--primary-color);
+  z-index: 2;
+  color: white;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.App-header nav a {
+  color: white;
+  text-decoration: none;
+  margin-left: 30px;
+  font-size: 1.1rem;
+}
+
+.language-selector-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  position: relative; /* Needed for dropdown positioning */
+}
+
+/* ---- FIXED TRANSLATE DROPDOWN ---- */
+
+/* Don’t hide the main container completely */
+body > div.skiptranslate {
+  display: block !important;
+  position: static !important;
+  visibility: visible !important;
+}
+
+/* Keep widget inline in header */
+#google_translate_element {
+  display: inline-block !important;
+  position: relative !important;
+  z-index: 1000 !important;
+  vertical-align: middle;
+}
+
+/* Hide “Powered by Google Translate” icon */
+.goog-te-gadget-simple .goog-te-gadget-icon {
+  display: none !important;
+}
+
+/* Adjust gadget text */
+.goog-te-gadget {
+  color: white !important;
+  font-size: 0.95rem !important;
+}
+
+/* Style dropdown */
+.goog-te-combo {
+  color: white;
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: sans-serif;
+  appearance: none;
+}
+
+/* Dropdown menu (popup) styling */
+.goog-te-menu-frame {
+  position: absolute !important;
+  top: 100% !important; /* Position right below the language selector container */
+  right: 0 !important;
+  border-radius: 8px !important;
+  z-index: 99999 !important;
+}
+
+.goog-te-menu2 {
+  max-width: 200px !important;
+  width: 200px !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+}
+
+/* ---- HERO ---- */
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero-content h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.hero-content h2 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-content p1 {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-button {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.hero-button:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.App {
+  text-align: center;
+}
+
+/* ---------- CHATBOT ---------- */
+
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: var(--shadow);
+  z-index: 9999;
+}
+
+.chat-toggle:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.chat-window {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  height: 480px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.chat-header {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 10px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow);
+}
+
+.chat-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.chat-header button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  max-width: 80%;
+}
+
+.message.user {
+  background-color: var(--primary-color);
+  align-self: flex-end;
+  color: white;
+}
+
+.message.bot {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+
+.video-container {
+  box-shadow: var(--shadow);
+  background: var(--primary-color);
+  padding: 10px;
+}
+
+.message img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  margin-top: 10px;
+}
+
+/* --- FIXED CHAT INPUT AREA --- */
+.chat-input {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+  background-color: #fff;
+  box-shadow: 0 -2px 10px var(--shadow-color);
+}
+
+.chat-input .icon-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 18px;
+  box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.chat-input .icon-btn:hover {
+  background-color: var(--primary-color-dark);
+}
+
+.chat-input input {
+  flex-grow: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+  box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.chat-input .send-btn {
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.chat-input .send-btn:hover {
+  background-color: var(--primary-color-dark);
+}
+
+/* --- Responsive adjustments --- */
+@media (max-width: 768px) {
+  .App-header {
+    padding: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .logo {
+    width: 100%;
+    text-align: center;
+  }
+
+  .App-header nav {
+    display: flex;
+    gap: 15px;
+  }
+
+  .App-header nav a {
+    margin: 5px 0;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+
+  .hero-button {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
+
+  .chat-window {
+    width: 90%;
+    right: 5%;
+    height: 420px;
+  }
+}
+
+.back-button {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 6px var(--shadow-color);
+}
+
+.back-button:hover {
+  background-color: #d32f2f;
+}
+
+.prediction-container {
+    background: none;
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    margin-top: 20px;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 300px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.card {
+    background: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.prediction-result h2 {
+    margin-top: 0;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+
+/* Custom file upload button */
+.file-upload-container {
+  border: 2px dashed #ccc;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.file-upload-container p {
+  margin: 0 0 10px 0;
+}
+
+.custom-file-upload {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+/* Predict button */
+.predict-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.predict-button:hover {
+  background-color: #45a049;
+}
+/* --- TYPING INDICATOR --- */
+.message.loading {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 5px 0;
+}
+
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 10px 15px;
+  background: #f1f1f1;
+  border-radius: 15px;
+  width: fit-content;
+}
+
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  background: #2E7D32;
+  border-radius: 50%;
+  animation: typing-bounce 1s infinite ease-in-out;
+}
+
+.typing-indicator span:nth-child(2) { animation-delay: 0.1s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.2s; }
+
+@keyframes typing-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.4; }
+  50% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* --- MARKDOWN STYLES --- */
+.message.bot a {
+  color: #2E7D32;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.message.bot p {
+  margin: 0;
+}
+
+.message.bot ul, .message.bot ol {
+  padding-left: 20px;
+  margin: 5px 0;
+}
