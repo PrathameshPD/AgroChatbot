@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# 🌾 AgroChatbot: AI-Powered Agricultural Assistant
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+AgroChatbot is an advanced AI assistant designed to help farmers and agricultural researchers with crop management, disease diagnosis, and data-driven decision-making. Built using a Retrieval-Augmented Generation (RAG) architecture, it leverages specialized knowledge on rice crops to provide accurate and actionable advice.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Key Features
 
-### `npm start`
+- **🤖 AI Agentic Chat**: Interact with a sophisticated AI agent that understands context and retrieves relevant information from a curated knowledge base.
+- **📚 Rice Crop Expertise**: Specialized support for rice varieties, disease identification, and management practices (based on scientific data).
+- **📊 Automated Report Generation**: Generate detailed PDF reports for specific locations and years, summarizing soil health and crop yields.
+- **✨ Modern UI/UX**: A responsive, premium interface built with React, featuring smooth animations and a dark-themed aesthetic.
+- **🔍 RAG Architecture**: Uses Supabase Vector Store and Google Gemini for high-quality, data-backed responses.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+### Frontend
+- **Framework**: [React](https://reactjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Backend
+- **Framework**: [FastAPI](https://fastapi.tiangolo.com/)
+- **AI Orchestration**: [LangChain](https://www.langchain.com/)
+- **LLM**: [Google Gemini (Flash-1.5)](https://ai.google.dev/)
+- **Database**: [Supabase](https://supabase.com/) (Vector Store & PostgreSQL)
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📁 Project Structure
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+AgroChatbot/
+├── backend/            # FastAPI application & RAG logic
+│   ├── agentic_rag.py  # Core AI agent & tools
+│   ├── ingest_in_db.py # Script to process data into Supabase
+│   └── main.py         # API endpoints
+├── frontend/           # React frontend application
+├── Data/               # Raw datasets (PDFs, Excel)
+├── requirements.txt    # Python dependencies
+└── run_app.bat         # Batch script to run both apps
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## ⚙️ Setup & Installation
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Prerequisites
+- Python 3.9+
+- Node.js & npm
+- [Supabase](https://supabase.com/) project (with `pgvector` enabled)
+- [Google AI Studio](https://aistudio.google.com/) API Key
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 1. Clone the Repository
+```bash
+git clone https://github.com/PrathameshPD/AgroChatbot.git
+cd AgroChatbot
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### 2. Backend Setup
+1. Create a virtual environment:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Configure Environment Variables:
+   Create a `.env` file in the `backend/` directory:
+   ```env
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_SERVICE_KEY=your_supabase_key
+   GOOGLE_API_KEY=your_google_gemini_key
+   API_BASE_URL=http://127.0.0.1:8000
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### 3. Frontend Setup
+1. Navigate to the frontend directory:
+   ```bash
+   cd frontend
+   npm install
+   ```
 
-## Learn More
+---
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 🏃 Running the Application
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Option A: Using the Batch Script (Windows)
+Simply run the included batch script from the root directory:
+```bash
+./run_app.bat
+```
 
-### Code Splitting
+### Option B: Manual Start
+**Start Backend:**
+```bash
+cd backend
+uvicorn main:app --reload
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+**Start Frontend:**
+```bash
+cd frontend
+npm start
+```
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🛠️ Data Ingestion
+To populate the vector database with your documents, run the ingestion script:
+```bash
+cd backend
+python ingest_in_db.py
+```
+*Make sure your documents (PDF/Excel) are placed in the `backend/documents/` folder.*
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📝 License
+Distributed under the MIT License. See `LICENSE` for more information.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🤝 Contributing
+Contributions are welcome! Please feel free to submit a Pull Request.
