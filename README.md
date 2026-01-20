@@ -1,4 +1,4 @@
-# 🌾 AgroChatbot: AI-Powered Agricultural Assistant
+# 🌾 AgroChatbot: AI-Powered Agricultural Assistant Chatbot
 
 AgroChatbot is an advanced AI assistant designed to help farmers and agricultural researchers with crop management, disease diagnosis, and data-driven decision-making. Built using a Retrieval-Augmented Generation (RAG) architecture, it leverages specialized knowledge on rice crops to provide accurate and actionable advice.
 
